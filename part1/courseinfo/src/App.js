@@ -13,6 +13,7 @@ const Total = (props) => {
 };
 
 const App = () => {
+  console.log("Hello from component");
   const course = "Half Stack application development";
   const part1 = "Fundamentals of React";
   const exercises1 = 10;
@@ -21,12 +22,18 @@ const App = () => {
   const part3 = "State of a component";
   const exercises3 = 14;
 
-  return (
+  const Content = () => {
     <div>
-      <Header course={course} />
       <Part part={part1} exercise={exercises1} />
       <Part part={part2} exercise={exercises2} />
       <Part part={part3} exercise={exercises3} />
+    </div>;
+  };
+
+  return (
+    <div>
+      <Header course={course} />
+      <Content />
       <Total sum={exercises1 + exercises2 + exercises3} />
     </div>
   );
