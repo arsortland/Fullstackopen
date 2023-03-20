@@ -17,7 +17,6 @@ const App = () => {
       <button onClick={handleClick}>Add</button>
       <button onClick={resetClick}>Reset</button>
     </div>
-
   )
 }
 
