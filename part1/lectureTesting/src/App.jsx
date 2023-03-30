@@ -1,29 +1,31 @@
 import { useState } from 'react'
 
+
+const Button = ({event, text}) => <button onClick={event}>{text}</button>
+
+const Display = ({counter}) =>{
+  return(
+    <div>{counter}</div>
+  )
+}
+
 const App = () => {
 
   const [ counter, setCounter ] = useState(0)
+  console.log("rendering with counter value", counter)
 
-  // setTimeout(
-  //   () => setCounter(counter + 1),
-  //   10000
-  // )
-
-  const Display = (props) =>{
-    return(
-      <div>{props.counter}</div>
-    )
+  const increaseClick = () => {
+    console.log("increasing, value before", counter)
+    setCounter (counter +1)
   }
-
-  const Button = (props) => {
-    return (
-      <button onClick={props.event}>{props.text}</button>
-    )
+  const decreaseClick = () => {
+    console.log("decreasing, value before", counter)
+    setCounter(counter-1)
   }
-
-  const increaseClick = () => setCounter (counter +1);
-  const decreaseClick = () => setCounter(counter-1)
-  const resetClick = () => setCounter(0);
+  const resetClick = () => {
+    console.log("resetting to zero, value before", counter)
+    setCounter(0);
+  }
 
   return (
     <div>
