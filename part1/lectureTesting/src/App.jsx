@@ -1,38 +1,37 @@
 import { useState } from 'react'
 
-
-const Button = ({event, text}) => <button onClick={event}>{text}</button>
-
-const Display = ({counter}) =>{
-  return(
-    <div>{counter}</div>
-  )
+const Button = ({func, name}) =>{
+  return <button onClick={func}>{name}</button>
 }
 
 const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const [total, setTotal] = useState(0)
 
-  const [ counter, setCounter ] = useState(0)
-  console.log("rendering with counter value", counter)
+  const handleLeftClick = () =>{
+    setAll(allClicks.concat("L"))
+    const updatedLeft = left + 1
+    setLeft(updatedLeft)
+    setTotal(updatedLeft + right)
+  }
 
-  const increaseClick = () => {
-    console.log("increasing, value before", counter)
-    setCounter (counter +1)
-  }
-  const decreaseClick = () => {
-    console.log("decreasing, value before", counter)
-    setCounter(counter-1)
-  }
-  const resetClick = () => {
-    console.log("resetting to zero, value before", counter)
-    setCounter(0);
+  const handleRightClick = () => {
+    setAll(allClicks.concat("R"))
+    const updatedRight = right + 1
+    setRight(updatedRight)
+    setTotal(updatedRight + left)
   }
 
   return (
     <div>
-      <Display counter={counter}/>
-      <Button event={increaseClick} text="Add"/>
-      <Button event={decreaseClick} text="Subtract"/>
-      <Button event={resetClick} text="Reset"/>
+      {left}
+      <Button func={handleLeftClick} name="left"/>
+      <Button func={handleRightClick} name="right"/>
+      {right}
+      <p>{allClicks.join(" ")}</p>
+      <p>total {total}</p>
     </div>
   )
 }
