@@ -4,6 +4,16 @@ const Button = ({func, name}) =>{
   return <button onClick={func}>{name}</button>
 }
 
+const History = ({allClicks}) => {
+  if (allClicks.length === 0){
+    return <div>
+      Press a button to use the app.
+    </div>
+  }
+  return <div> Press history: {allClicks.join(" ")}</div>
+}
+
+
 const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
@@ -30,8 +40,8 @@ const App = () => {
       <Button func={handleLeftClick} name="left"/>
       <Button func={handleRightClick} name="right"/>
       {right}
-      <p>{allClicks.join(" ")}</p>
       <p>total {total}</p>
+      <History allClicks={allClicks}/>
     </div>
   )
 }
