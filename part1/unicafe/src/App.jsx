@@ -38,7 +38,6 @@ const App = () => {
   setBad(newBadVal)
  }
 
-
   return (
     <div>
       <Header text= "Give Feedback"/>
