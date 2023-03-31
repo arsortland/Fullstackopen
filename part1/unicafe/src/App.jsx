@@ -14,7 +14,7 @@ const HeaderParagraph = ({text}) =>{
 }
 
 const StatisticLine = ({text, count}) => {
-  return <p>{text} {count}</p>
+  return <tr>{text} <td>{count}</td></tr>
 }
 
 const Statistics = ({array, count, count1, count2, count3, count4, count5}) => {
@@ -22,14 +22,14 @@ const Statistics = ({array, count, count1, count2, count3, count4, count5}) => {
     return <div>No feedback received</div>
   }
   return (
-    <div>
+    <table>
     <StatisticLine text={"Good"} count={count}/>
     <StatisticLine text={"Neutral"} count={count1}/>
     <StatisticLine text={"Bad"} count={count2}/>
     <StatisticLine text={"Total Presses"} count={count3}/>
     <StatisticLine text={"Average"} count={count4}/>
     <StatisticLine text={"Positive clicks in %"} count={count5}/>
-    </div>
+    </table>
   )
 }
 
