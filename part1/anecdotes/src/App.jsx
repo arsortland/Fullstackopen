@@ -18,7 +18,10 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
-  const [vote, newVote]  = useState([0,0,0,0,0,0,0])
+  const voteArr = new Array(anecdotes.length).fill(0)
+  const copyArr = [...voteArr]
+  const [vote, upVote] = useState(voteArr)
+
 
  const randomAnecdote = () =>{
   const newSelected = Math.floor(Math.random() * anecdotes.length)
@@ -26,20 +29,20 @@ const App = () => {
   return setSelected(newSelected)
  }
 
-//  const voteArr = new Uint8Array(anecdotes.length)
- const voteClick = () => {
-   const copy = [...vote]
-   console.log(copy[selected] += 1)
-   return newVote(copy[selected] += 1)
+ const voteAnecdote = () =>{
+  //From https://stackoverflow.com/questions/67123442/how-do-i-increment-the-count-of-a-selected-index-of-state-object-using-setstate
+  return upVote(current => Object.assign([], current, {
+    [selected]: current[selected] + 1
+  }));
  }
 
   return (
     <div>
       {anecdotes[selected]}
-      <p>Votes: {vote[selected]}</p>
+      <p>Vote(s): {vote[selected]}</p>
       <br/>
       <Button func={randomAnecdote} text="Random Anecdote"/>
-      <Button func={voteClick} text="Vote"/>
+      <Button func={voteAnecdote} text="Vote"/>
     </div>
   )
 }
