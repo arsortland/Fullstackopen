@@ -5,6 +5,26 @@ const Button = ({func, text}) =>{
   return <button onClick={func}>{text}</button>
 }
 
+const MostVoted = ({arrayAnecdotes, arrayVotes}) =>{
+  const sum = arrayVotes.reduce((partialSum, a) =>  partialSum + a, 0)
+  if (sum === 0){
+    return (
+      <div>
+        No anecdotes have been voted for.
+      </div>
+    )
+  }
+  const highestIndex = arrayVotes.indexOf(Math.max(...arrayVotes))
+  return(
+    <div>
+      <h3>Anecdotes with most votes</h3>
+      {arrayAnecdotes[highestIndex]}
+    </div>
+  )
+
+
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -19,13 +39,12 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
   const voteArr = new Array(anecdotes.length).fill(0)
-  const copyArr = [...voteArr]
+  // const copyArr = [...voteArr]
   const [vote, upVote] = useState(voteArr)
 
 
  const randomAnecdote = () =>{
   const newSelected = Math.floor(Math.random() * anecdotes.length)
-  // console.log(newSelected)
   return setSelected(newSelected)
  }
 
@@ -38,11 +57,13 @@ const App = () => {
 
   return (
     <div>
+      <h3>Anecdotes of the day</h3>
       {anecdotes[selected]}
       <p>Vote(s): {vote[selected]}</p>
       <br/>
       <Button func={randomAnecdote} text="Random Anecdote"/>
       <Button func={voteAnecdote} text="Vote"/>
+      <MostVoted arrayAnecdotes={anecdotes} arrayVotes={vote}/>
     </div>
   )
 }
