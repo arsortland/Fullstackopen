@@ -21,8 +21,6 @@ const MostVoted = ({arrayAnecdotes, arrayVotes}) =>{
       {arrayAnecdotes[highestIndex]}
     </div>
   )
-
-
 }
 
 const App = () => {
